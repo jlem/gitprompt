@@ -32,6 +32,9 @@ PROMPT_COMMAND=makePrompt
 |`GIT_PROMPT_COLOR_BRANCH_OUT_OF_SYNC`| `$P_LIGHT_GREEN` |
 |`GIT_PROMPT_COLOR_BRANCH_OK`| `$P_GREEN` |
 |`GIT_PROMPT_COLOR_COMMIT_DELTA_COUNTS`| `$P_DARK_GRAY` |
+|`GIT_PROMPT_BRANCH_STATUS_ICON_OUT_OF_SYNC`| `' *'` |
+|`GIT_PROMPT_BRANCH_STATUS_ICON_CONFLICT`| `' ⚠︎ '` |
+|`GIT_PROMPT_BRANCH_STATUS_ICON_OK`| `' ✔︎ '` |
 
 ### Example usage of configuration options
 Simply export any of those options and their new values from your .bash_profile or .bashrc
