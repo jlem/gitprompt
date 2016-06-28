@@ -1,7 +1,6 @@
 #!/bin/bash
 
-source ~/git-prompt.sh
-source ~/Scripts/colors.sh
+source ./colors.sh
 
 getGitPrompt () {
 
