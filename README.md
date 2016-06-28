@@ -4,7 +4,7 @@ source ./gitprompt.sh
 
 function makePrompt()
 {
-    PS1="\u \w `getGitPrompt` $"
+    PS1="\u \w `getGitPrompt` $ "
 }
 
 PROMPT_COMMAND=makePrompt
