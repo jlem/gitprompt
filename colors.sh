@@ -1,6 +1,9 @@
 #!/bin/bash
 
-#Colors
+#
+# Color definitions
+# DO NOT USE THESE IN PROMPTS DIRECTLY, use the P_ prefixed version for prompts below
+#
 R_CYAN="\033[38;5;30m"
 R_BRIGHT_CYAN="\033[38;5;37m"
 R_LIGHT_GRAY="\033[0;37m"
@@ -13,6 +16,11 @@ R_DARK_GRAY="\033[38;5;241m"
 R_VERY_DARK_GRAY="\033[38;5;236m"
 R_NC="\033[0m"
 
+#
+# Colors prefixed with P_ are prompt-safe, as they wrap the above colors with the correct escape characters
+# If you plan on using any of these colors for your own prompt info, be sure to use these P_ prefixed colors
+# else your prompt will exhibit weird wrapping behavior
+#
 P_CYAN="\[$R_CYAN\]"
 P_BRIGHT_CYAN="\[$R_BRIGHT_CYAN\]"
 P_LIGHT_GRAY="\[$R_LIGHT_GRAY\]"
