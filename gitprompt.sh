@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ~/gitprompt/colors.sh
-
 #
 # Configuration 
 #

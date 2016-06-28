@@ -1,5 +1,5 @@
-# Installation
-cd ~ && git clone https://github.com/jlem/gitprompt.git
+# Quick Installation
+`cd ~ && git clone https://github.com/jlem/gitprompt.git`
 
 Feel free to move this anywhere, but remember to source both `colors.sh` and `gitprompt.sh`
 
