@@ -38,7 +38,7 @@ Simply export any of those options and their new values from your .bash_profile 
 
 ```
 export GIT_PROMPT_SHOW_UNTRACKED_COUNT=false
-export GIT_PROMPT_COLOR_COMMIT_DELTA_COUNTS=`$P_ORANGE`
+export GIT_PROMPT_COLOR_COMMIT_DELTA_COUNTS=$P_ORANGE
 ```
 
 Colors can be any properly escaped prompt-safe color definition, but the provided `colors.sh` sourced at the top of your bash file offers a few named constants to use instead of the raw color codes.
