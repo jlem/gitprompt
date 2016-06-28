@@ -1,6 +1,11 @@
 #!/bin/bash
 
-source ./colors.sh
+source ~/gitprompt/colors.sh
+
+GIT_PROMPT_SHOW_STASH_COUNT=true
+GIT_PROMPT_SHOW_STAGING_COUNTS=true
+GIT_PROMPT_SHOW_UNTRACKED_COUNT=true
+GIT_PROMPT_SHOW_COMMIT_DELTA_COUNTS=true
 
 getGitPrompt () {
 
@@ -30,6 +35,10 @@ getGitPrompt () {
     #
     function parseStash()
     {
+        if [[ $GIT_PROMPT_SHOW_STASH_COUNT == false ]]; then
+            return 0
+        fi
+
         local stash_command="$(git stash list 2>/dev/null)"
         local stash_regex="^stash@"
 
@@ -137,15 +146,17 @@ getGitPrompt () {
     #
     function buildStagingString()
     {
-        if [[ $staged_counter > 0 ]]; then
-            stage_string+="${P_VERY_DARK_GRAY}∙${P_BRIGHT_CYAN}${staged_counter}"
+        if [[ $GIT_PROMPT_SHOW_STAGING_COUNTS ]]; then
+            if [[ $staged_counter > 0 ]]; then
+                stage_string+="${P_VERY_DARK_GRAY}∙${P_BRIGHT_CYAN}${staged_counter}"
+            fi
+
+            if [[ $unstaged_counter > 0 ]]; then
+                stage_string+="${P_VERY_DARK_GRAY}∙${P_RED}${unstaged_counter}"
+            fi
         fi
 
-        if [[ $unstaged_counter > 0 ]]; then
-            stage_string+="${P_VERY_DARK_GRAY}∙${P_RED}${unstaged_counter}"
-        fi
-
-        if [[ $untracked_counter > 0 ]]; then
+        if [[ $GIT_PROMPT_SHOW_UNTRACKED_COUNT && $untracked_counter > 0 ]]; then
             stage_string+="${P_VERY_DARK_GRAY}∙${P_ORANGE}${untracked_counter}"
         fi
 
@@ -163,6 +174,10 @@ getGitPrompt () {
     #
     function buildDifferenceString()
     {
+        if [[ $GIT_PROMPT_SHOW_COMMIT_DELTA_COUNTS == false ]]; then
+            return 0
+        fi
+
         if [[ -n "$branch" && $ahead > 0 && $behind == 0 ]]; then
             difference_string+="$P_DARK_GRAY[+$ahead] "
         fi
