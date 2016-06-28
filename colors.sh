@@ -17,7 +17,7 @@ R_VERY_DARK_GRAY="\033[38;5;236m"
 R_NC="\033[0m"
 
 #
-# Colors prefixed with P_ are prompt-safe, as they wrap the above colors with the correct escape characters
+# Colors prefixed with P_ are prompt-safe, as they wrap the above color definitions with the correct escape characters
 # If you plan on using any of these colors for your own prompt info, be sure to use these P_ prefixed colors
 # else your prompt will exhibit weird wrapping behavior
 #
