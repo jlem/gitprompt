@@ -16,6 +16,10 @@ GIT_PROMPT_COLOR_BRANCH_OUT_OF_SYNC=$P_LIGHT_GREEN
 GIT_PROMPT_COLOR_BRANCH_OK=$P_GREEN
 GIT_PROMPT_COLOR_COMMIT_DELTA_COUNTS=$P_DARK_GRAY
 
+GIT_PROMPT_BRANCH_STATUS_ICON_OUT_OF_SYNC=" *"
+GIT_PROMPT_BRANCH_STATUS_ICON_CONFLICT=" ⚠︎ "
+GIT_PROMPT_BRANCH_STATUS_ICON_OK=" ✓"
+
 #
 # Main funtion 
 #
@@ -213,15 +217,15 @@ getGitPrompt () {
     function determineBranchStatus()
     {
         if [[ $ahead > 0 || $behind > 0 ]]; then
-            branch_status=" *"
+            branch_status=$GIT_PROMPT_BRANCH_STATUS_ICON_OUT_OF_SYNC
         fi
 
         if [[ $conflicts_counter > 0 ]]; then
-            branch_status=" ⚠︎ "
+            branch_status=$GIT_PROMPT_BRANCH_STATUS_ICON_CONFLICT
         fi 
 
         if [[ $unstaged_counter == 0 && $staged_counter == 0 && $conflicts_counter == 0 && $ahead == 0 && $behind == 0 ]]; then
-            branch_status=" ✓"
+            branch_status=$GIT_PROMPT_BRANCH_STATUS_ICON_OK
         fi
     }
 
