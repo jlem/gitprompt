@@ -2,11 +2,25 @@
 
 source ~/gitprompt/colors.sh
 
+#
+# Configuration 
+#
 GIT_PROMPT_SHOW_STASH_COUNT=true
 GIT_PROMPT_SHOW_STAGING_COUNTS=true
 GIT_PROMPT_SHOW_UNTRACKED_COUNT=true
 GIT_PROMPT_SHOW_COMMIT_DELTA_COUNTS=true
 
+GIT_PROMPT_COLOR_STASH_COUNT=$P_DARK_GRAY
+GIT_PROMPT_COLOR_UNTRACKED_COUNT=$P_ORANGE
+GIT_PROMPT_COLOR_UNSTAGED=$P_RED
+GIT_PROMPT_COLOR_STAGED=$P_BRIGHT_CYAN
+GIT_PROMPT_COLOR_BRANCH_OUT_OF_SYNC=$P_LIGHT_GREEN
+GIT_PROMPT_COLOR_BRANCH_OK=$P_GREEN
+GIT_PROMPT_COLOR_COMMIT_DELTA_COUNTS=$P_DARK_GRAY
+
+#
+# Main funtion 
+#
 getGitPrompt () {
 
     local exit="$?"
@@ -148,20 +162,20 @@ getGitPrompt () {
     {
         if [[ $GIT_PROMPT_SHOW_STAGING_COUNTS ]]; then
             if [[ $staged_counter > 0 ]]; then
-                stage_string+="${P_VERY_DARK_GRAY}∙${P_BRIGHT_CYAN}${staged_counter}"
+                stage_string+="${P_VERY_DARK_GRAY}∙${GIT_PROMPT_COLOR_STAGED}${staged_counter}"
             fi
 
             if [[ $unstaged_counter > 0 ]]; then
-                stage_string+="${P_VERY_DARK_GRAY}∙${P_RED}${unstaged_counter}"
+                stage_string+="${P_VERY_DARK_GRAY}∙${GIT_PROMPT_COLOR_UNSTAGED}${unstaged_counter}"
             fi
         fi
 
         if [[ $GIT_PROMPT_SHOW_UNTRACKED_COUNT && $untracked_counter > 0 ]]; then
-            stage_string+="${P_VERY_DARK_GRAY}∙${P_ORANGE}${untracked_counter}"
+            stage_string+="${P_VERY_DARK_GRAY}∙${GIT_PROMPT_COLOR_UNTRACKED_COUNT}${untracked_counter}"
         fi
 
         if [[ $stash_counter > 0 ]]; then
-            stage_string+="${P_VERY_DARK_GRAY}∙${P_DARK_GRAY}${stash_counter}"
+            stage_string+="${P_VERY_DARK_GRAY}∙${GIT_PROMPT_COLOR_STASH_COUNT}${stash_counter}"
         fi
 
         stage_string+="${P_NC}"
@@ -179,15 +193,15 @@ getGitPrompt () {
         fi
 
         if [[ -n "$branch" && $ahead > 0 && $behind == 0 ]]; then
-            difference_string+="$P_DARK_GRAY[+$ahead] "
+            difference_string+="$GIT_PROMPT_COLOR_COMMIT_DELTA_COUNTS[+$ahead] "
         fi
 
         if [[ -n "$branch" && $behind > 0 && $ahead == 0 ]]; then
-            difference_string+="$P_DARK_GRAY[-$behind] "
+            difference_string+="$GIT_PROMPT_COLOR_COMMIT_DELTA_COUNTS[-$behind] "
         fi
 
         if [[ -n "$branch" && $ahead > 0 && $behind > 0 ]]; then
-            difference_string+="$P_DARK_GRAY[+$ahead-$behind] "
+            difference_string+="$GIT_PROMPT_COLOR_COMMIT_DELTA_COUNTS[+$ahead-$behind] "
         fi
     }
     
@@ -221,17 +235,17 @@ getGitPrompt () {
         if [ -z "$branch" ]; then
             prompt_string=""
         elif [[ $ahead > 0 || $behind > 0 ]]; then
-            prompt_string="$P_LIGHT_GREEN(${branch}${branch_status})"
+            prompt_string="$GIT_PROMPT_COLOR_BRANCH_OUT_OF_SYNC(${branch}${branch_status})"
         else
-            prompt_string="$P_GREEN(${branch}${branch_status})"
+            prompt_string="$GIT_PROMPT_COLOR_BRANCH_OK(${branch}${branch_status})"
         fi
 
         if [[ -n "$branch" && $unstaged_counter > 0 ]]; then
-            prompt_string="$P_RED(${branch}${branch_status})"
+            prompt_string="$GIT_PROMPT_COLOR_UNSTAGED(${branch}${branch_status})"
         fi
 
         if [[ -n "$branch" && $staged_counter > 0 ]]; then
-            prompt_string="$P_BRIGHT_CYAN(${branch}${branch_status})"
+            prompt_string="$GIT_PROMPT_COLOR_STAGED(${branch}${branch_status})"
         fi
 
         if [[ -n "$branch" && $conflicts_counter > 0 ]]; then
