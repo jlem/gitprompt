@@ -227,7 +227,7 @@ getGitPrompt () {
             prompt_string+="${difference_string}"
         fi
 
-        PS1="${P_LIGHT_GRAY}\u ${P_CYAN}\w ${prompt_string}${stage_string} ${P_LIGHT_GRAY}$ "
+        echo ${prompt_string}${stage_string}${P_NC}
     }
 
     parseStash
